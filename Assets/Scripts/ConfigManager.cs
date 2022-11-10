@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ConfigManager : MonoBehaviour {
     public static ConfigManager instance = null;
-
+      //zzzaa
     // public Configuration config = null;
     void Awake(){
         // if(instance == null){

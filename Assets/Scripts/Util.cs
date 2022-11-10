@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Newtonsoft.Json;
-using Chsword;
+// using Chsword;
 
 public static class Util {
     public static JSONObject getJSON2(string str, params object[] args){
@@ -35,8 +35,8 @@ public static class Util {
        
     // }
 
-    public static dynamic getDynamic(JSONObject obj){
-         return new JDynamic(obj.ToString());
-    }
+    // public static dynamic getDynamic(JSONObject obj){
+    //      return new JDynamic(obj.ToString());
+    // }
 
 }

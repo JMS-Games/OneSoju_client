@@ -140,7 +140,7 @@ public class SubLoading : MonoBehaviour
             this.errorCanvas = GameObject.Find("subloading").transform.Find("errorCanvas").gameObject;
 
             var okButton = GameObject.Find("subloading").transform.Find("errorCanvas").Find("errorCanvasBtnOK").gameObject;
-            okButton.GetComponent<Lean.Gui.LeanButton>().OnClick.AddListener(endSubLoading);
+            // okButton.GetComponent<Button>().OnClick.AddListener(endSubLoading);
 
             errorCanvas.SetActive(false);
             DontDestroyOnLoad(this.newCanvas);

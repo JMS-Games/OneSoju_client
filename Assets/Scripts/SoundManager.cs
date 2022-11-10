@@ -79,6 +79,7 @@ public class SoundManager : MonoBehaviour
     void init(){
         storage = new Dictionary<string,AudioClip>();
         registerSound(new Sound("mainBgm","Audio/BGM/mainSound"));
+        registerSound(new Sound("bgm","Audio/BGM/bgm"));
 
 
     }

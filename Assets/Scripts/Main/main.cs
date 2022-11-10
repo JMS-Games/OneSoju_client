@@ -11,7 +11,7 @@ public class main : MonoBehaviour
 
     void Start()
     {
-        SoundManager.instance.playBGM("mainBgm", true);
+        SoundManager.instance.playBGM("bgm", true);
 
     }
 

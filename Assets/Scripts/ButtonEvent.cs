@@ -9,7 +9,7 @@ public class ButtonEvent : MonoBehaviour {
         SocketManager.instance.connect();
 
         StartCoroutine(SocketManager.instance.subLoadingUntilConnect(()=>{
-            SceneManager.instance.changeScene("nickname");
+            
         }));
     }
 
