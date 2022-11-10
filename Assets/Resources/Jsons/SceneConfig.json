@@ -1,0 +1,25 @@
+{
+    "sceneList" : [
+        {
+            "index" : 0,
+            "name" : "main"
+        },
+        {
+            "index" : 1,
+            "name" : "selectScene"
+        },
+        {
+            "index" : 2,
+            "name" : "hostRoom"
+        },
+        {
+            "index" : 3,
+            "name" : "joinRoom"
+        },
+        {
+            "index" : 4,
+            "name" : "mainGame"
+        }
+        
+    ]
+}

@@ -1,0 +1,17 @@
+[Gateway]
+development = ws://localhost:33141/socket.io/?EIO=4&transport=websocket
+
+[Signal]
+CREATE_ROOM = 0
+JOIN_ROOM = 1
+SEND_CHAT   = 2
+ROLL_DICE   = 3
+LEAVE_ROOM  = 4
+NEXT_TURN = 5
+PLAYER_READY = 6
+START_GAME = 7
+REFRESH_ROOM = 8
+REFRESH_GAME = 9
+REFRESH_CHAT = 10
+KICK_PLAYER = 11
+HAND_SHAKE = 12
