@@ -7,10 +7,13 @@ public class ButtonEvent : MonoBehaviour {
 
     public void onMultiPlayClick(){
         SocketManager.instance.connect();
-
+        
         StartCoroutine(SocketManager.instance.subLoadingUntilConnect(()=>{
-            
-        }));
+            SocketManager.instance.requestSync(Sig.REQUEST_MATCH,
+            new { uuid = 123 }, (res)=>{
+                Debug.Log(res);
+            });
+    }));
     }
 
 

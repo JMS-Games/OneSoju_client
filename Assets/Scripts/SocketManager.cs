@@ -21,7 +21,6 @@ public class SocketManager : MonoBehaviour {
             isConnected = false;
             requestID = 1000;
 
-           
         } else {
             Destroy(this.gameObject);
         }
