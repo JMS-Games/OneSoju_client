@@ -19,10 +19,10 @@ public class CardController : MonoBehaviour {
     public void setCardNum(int cardNum){
         this.cardNum = cardNum;
         this.initUI();
+        
     }
 
     void initUI(){
-
         string shape = "";
 
         switch(this.cardNum/13){
