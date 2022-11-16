@@ -56,6 +56,12 @@ public class JSONObject {
 		}
 	}
 #endif
+
+	public int i {
+		get {
+			return (int)n;
+		}
+	}
 	public bool b;
 	public delegate void AddJSONConents(JSONObject self);
 
@@ -125,6 +131,7 @@ public class JSONObject {
 		str = obj.str;
 		n = obj.n;
 		b = obj.b;
+		i = obj.i;
 		type = obj.type;
 	}
 	public static JSONObject Create() {
@@ -175,6 +182,7 @@ public class JSONObject {
 		JSONObject obj = Create();
 		obj.type = Type.NUMBER;
 		obj.n = val;
+		obj.i = val;
 		return obj;
 	}
 	public static JSONObject CreateStringObject(string val) {
