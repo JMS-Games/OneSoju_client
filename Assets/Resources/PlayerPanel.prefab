@@ -617,7 +617,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2854290266341083513}
-  - component: {fileID: 401219694608311120}
+  - component: {fileID: 5388301157624830184}
   m_Layer: 0
   m_Name: PlayerPanel
   m_TagString: Untagged
@@ -641,7 +641,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &401219694608311120
+--- !u!114 &5388301157624830184
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -650,10 +650,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4426510261854302211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3dcd229f0de2c384291403c47b67df18, type: 3}
+  m_Script: {fileID: 11500000, guid: 1987340732f3e4695bef287bf97803f9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cardNum: 0
+  playerID: 0
+  playerRank: 0
+  isComplete: 0
+  isMaster: 0
+  isTurn: 0
+  leftTime: 0
+  leftCard: 0
 --- !u!1 &4994662989136264250
 GameObject:
   m_ObjectHideFlags: 0
