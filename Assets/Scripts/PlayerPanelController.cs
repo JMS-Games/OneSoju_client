@@ -20,6 +20,7 @@ public class PlayerPanelController : MonoBehaviour {
 
 
     Image imgPlayer;
+    Image imgTurn;
     List<Image> imgRank = new List<Image>();
 
     TextMeshProUGUI lbPlayerName;
@@ -47,6 +48,7 @@ public class PlayerPanelController : MonoBehaviour {
         var canvas = this.transform.Find("Canvas");
 
         this.imgPlayer = canvas.Find("imgPlayer").GetComponent<Image>();
+        this.imgTurn = canvas.Find("imgTurn").GetComponent<Image>();
 
         for(int i = 0; i<4;i++){
             var imgRank = canvas.Find("imgRank"+(i+1)).GetComponent<Image>();
