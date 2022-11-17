@@ -9,11 +9,11 @@ using UnityEngine.EventSystems;
 
 using SocketIO;
 using TMPro;
-public class OneSojuUIController : MonoBehaviour {
+public class UIController : MonoBehaviour {
 
     Button btnEndTurn;
     Button btnExit;
-    OneSojuUIController(){
+    UIController(){
 
     }
 

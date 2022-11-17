@@ -66,18 +66,17 @@ public class SocketManager : MonoBehaviour {
         //     }
         // });
 
-        // socket.On(Sig.CREATE_ROOM,(e) => {
-        //     JSONObject res = e.data;
-        //     SubLoading.instance.endSubLoading();
+        socket.On(Sig.JOIN_ROOM,(e) => {
+            JSONObject res = e.data;
+            SubLoading.instance.endSubLoading();
 
-        //     if(res.GetField("CODE").f==500){
-        //         //do nothing
-        //     } else if(res.GetField("CODE").f ==200){
-        //         Player.setRoomData(res.GetField("roomData"));
-
-        //         SceneManager.instance.changeScene("roomscene");
-        //     }
-        // });
+            if(res.GetField("CODE").f==500){
+                //do nothing
+            } else if(res.GetField("CODE").f ==200){
+                // OneSojuUIController.
+                // GameManager.instance.Awake();
+            }
+        });
 
 
         // socket.On(Sig.REFRESH_ROOM,(e) => {
