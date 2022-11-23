@@ -13,6 +13,13 @@ public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
     UIController ui;
+
+
+
+    //여기서 게임 관련된 데이터 관리 필요 할 듯 ?
+
+    
+
     GameManager(){
 
     }
@@ -31,6 +38,26 @@ public class GameManager : MonoBehaviour {
     }
     
     void Start(){
+
+    }
+
+
+
+
+
+    public void onJoinRoom(JSONObject res){
+        PlayerContainer.instance.joinMember(res);
+    }
+
+    public void onExitRoom(JSONObject res){
+
+    }
+
+    public void onYourTurn(JSONObject res){
+
+    }
+
+    public void onUseResult(JSONObject res){
 
     }
 

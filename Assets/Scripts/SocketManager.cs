@@ -68,13 +68,13 @@ public class SocketManager : MonoBehaviour {
 
         socket.On(Sig.JOIN_ROOM,(e) => {
             JSONObject res = e.data;
-            SubLoading.instance.endSubLoading();
 
             if(res.GetField("CODE").f==500){
                 //do nothing
             } else if(res.GetField("CODE").f ==200){
                 // OneSojuUIController.
                 // GameManager.instance.Awake();
+                GameManager.instance.onJoinRoom(res);
             }
         });
 
