@@ -26,8 +26,7 @@ public class GameManager : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
-        ui = this.GetComponent<UIController>();
-
+        ui = this.transform.parent.Find("Canvas").GetComponent<UIController>();
         
     }
     
