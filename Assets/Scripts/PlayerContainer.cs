@@ -65,9 +65,13 @@ public class PlayerContainer : MonoBehaviour {
     }
 
     public void joinMember(JSONObject res){
-        int playerID = res.GetField("playerID").i;
-        GameMember m = new GameMember(res);
+        var playerID = res.GetInt("id");
+        if (playerID is not null)
+        {
+            GameMember m = new GameMember(res);
+            this.container.Add(m);
 
-        this.container.Add(m);
+        }
+
     }
 }

@@ -43,7 +43,7 @@ public class GameManager : MonoBehaviour {
 
     public void AwakeGameManager()
     {
-        ui = this.transform.parent.Find("Canvas").GetComponent<UIController>();
+        ui = GameObject.Find("Canvas").GetComponent<UIController>();
 
     }
     

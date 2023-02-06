@@ -33,6 +33,7 @@ public class SocketManager : MonoBehaviour {
         SubLoading.instance.showSubLoading();
         for(;;){
             if(this.socket.socket.IsConnected){
+                Debug.Log("소켓 연결 완료 ");
                 SubLoading.instance.endSubLoading();
                 cb();
                 yield return null;
@@ -66,17 +67,17 @@ public class SocketManager : MonoBehaviour {
         //     }
         // });
 
-        socket.On(Sig.JOIN_ROOM,(e) => {
-            JSONObject res = e.data;
-
-            if(res.GetField("CODE").f==500){
-                //do nothing
-            } else if(res.GetField("CODE").f ==200){
-                // OneSojuUIController.
-                // GameManager.instance.Awake();
-                GameManager.instance.onJoinRoom(res);
-            }
-        });
+        // socket.On(Sig.JOIN_ROOM,(e) => {
+        //     JSONObject res = e.data;
+        //
+        //     if(res.GetField("CODE").f==500){
+        //         //do nothing
+        //     } else if(res.GetField("CODE").f ==200){
+        //         // OneSojuUIController.
+        //         // GameManager.instance.Awake();
+        //         GameManager.instance.onJoinRoom(res);
+        //     }
+        // });
 
 
         // socket.On(Sig.REFRESH_ROOM,(e) => {

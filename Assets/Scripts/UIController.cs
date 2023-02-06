@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -33,11 +34,15 @@ public class UIController : MonoBehaviour {
     }
 
     void onBtnEndTurnClick(){
-
+        
     }
 
     void onBtnExitClick(){
-
+        SocketManager.instance.requestSync(Sig.EXIT_ROOM, new {}, (res) =>
+        {
+            SceneManager.instance.changeScene("Main");
+            SocketManager.instance.disconnect();
+        });
     }    
     
     void Start(){

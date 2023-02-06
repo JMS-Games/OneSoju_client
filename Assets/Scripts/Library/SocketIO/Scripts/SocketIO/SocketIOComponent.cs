@@ -159,6 +159,7 @@ namespace SocketIO
 					
 		
 					EmitEvent("disconnect");
+					Debug.Log("emit disconnect");
 				}
 			}
 
@@ -331,6 +332,8 @@ namespace SocketIO
 
 		private void EmitClose()
 		{
+			Debug.Log("emit close");
+
 			EmitPacket(new Packet(EnginePacketType.MESSAGE, SocketPacketType.DISCONNECT, 0, "/", -1, new JSONObject("")));
 			EmitPacket(new Packet(EnginePacketType.CLOSE));
 		}
