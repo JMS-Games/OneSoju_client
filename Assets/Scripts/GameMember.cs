@@ -11,7 +11,7 @@ using SocketIO;
 using TMPro;
 public class GameMember {
 
-    public int playerID;
+    public string playerID;
     public int cardLeft;
     public int rank;
     public bool isComplete;
@@ -22,8 +22,9 @@ public class GameMember {
 
 
 
-    public GameMember(JSONObject res){
-        
+    public GameMember(JSONObject res)
+    {
+        playerID = res.GetString("id");
     }
 
     void setMemberData(JSONObject res){

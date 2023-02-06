@@ -190,7 +190,7 @@ public class SocketManager : MonoBehaviour {
     }
 
     public void requestSync(int sig, object obj, Action<JSONObject> callback){
-        if(instance == null){
+        if(instance is null){
             UnityEngine.SceneManagement.SceneManager.LoadScene("main");
         }
         SubLoading.instance.showSubLoading();

@@ -7,6 +7,7 @@ using Newtonsoft.Json;
 // using Chsword;
 
 public static class Util {
+    
     public static JSONObject getJSON2(string str, params object[] args){
         foreach(var arg in args){
             int idx = str.IndexOf("@");

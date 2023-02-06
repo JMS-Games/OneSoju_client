@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour {
     UIController ui;
 
 
+    private JSONObject memberData = null;
 
     //여기서 게임 관련된 데이터 관리 필요 할 듯 ?
 
@@ -33,7 +34,6 @@ public class GameManager : MonoBehaviour {
             Destroy(this.gameObject);
         }
 
-        ui = this.transform.parent.Find("Canvas").GetComponent<UIController>();
         
     }
     
@@ -41,9 +41,32 @@ public class GameManager : MonoBehaviour {
 
     }
 
+    public void AwakeGameManager()
+    {
+        ui = this.transform.parent.Find("Canvas").GetComponent<UIController>();
 
+    }
+    
+    public void setMemberData(JSONObject res)
+    {
+        // List<GameMember> m = new List<GameMember>();
+        //
+        // var p = res.GetField("players");
+        // for (var i = 0; i < p.Count;i++)
+        // {
+        //     GameMember mm = new GameMember(p[i]);
+        //     m.Add(mm);
+        // }
 
+        this.memberData = res;
+        
+        Debug.Log("memberData "+this.memberData);
+    }
 
+    public JSONObject getInitMember()
+    {
+        return this.memberData;
+    }
 
     public void onJoinRoom(JSONObject res){
         PlayerContainer.instance.joinMember(res);

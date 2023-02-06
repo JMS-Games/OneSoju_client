@@ -548,6 +548,28 @@ public class JSONObject {
 		}
 		if(fail != null) fail.Invoke(name);
 	}
+
+	public string GetString(string name)
+	{
+		var obj = this.GetField(name);
+		if (obj is not null)
+		{
+			return obj.str;
+		}
+
+		return null;
+	}
+	
+	public int? GetInt(string name)
+	{
+		var obj = this.GetField(name);
+		if (obj is not null)
+		{
+			return obj.i;
+		}
+
+		return null;
+	}
 	public JSONObject GetField(string name) {
 		if(type == Type.OBJECT)
 			for(int i = 0; i < keys.Count; i++)

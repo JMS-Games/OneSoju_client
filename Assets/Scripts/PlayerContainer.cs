@@ -30,14 +30,26 @@ public class PlayerContainer : MonoBehaviour {
         else {
             Destroy(this.gameObject);
         }
+        
+        GameManager.instance.AwakeGameManager();
+
+        this.initMember();
 
     }
-    
+
+    void initMember()
+    {
+        var memberList = GameManager.instance.getInitMember();
+        
+        for(var i = 0; i<memberList.Count; i++){
+            this.joinMember(memberList[i]);
+        }
+    }
     void Start(){
     
     }
 
-    public GameMember getMemberByID(int id){
+    public GameMember getMemberByID(string id){
         foreach(GameMember m in container){
             if(m.playerID == id){
                 return m;
@@ -45,7 +57,7 @@ public class PlayerContainer : MonoBehaviour {
         }
         return null;
     }
-    public void removeMember(int targetID){
+    public void removeMember(string targetID){
         var m = this.getMemberByID(targetID);
         if(m != null){
             this.container.Remove(m);

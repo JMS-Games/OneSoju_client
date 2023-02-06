@@ -10,8 +10,11 @@ public class ButtonEvent : MonoBehaviour {
         
         StartCoroutine(SocketManager.instance.subLoadingUntilConnect(()=>{
             SocketManager.instance.requestSync(Sig.REQUEST_MATCH,
-            new { uuid = 123 }, (res)=>{
-                Debug.Log(res);
+            new { uuid = SystemInfo.deviceUniqueIdentifier }, (res)=>
+            {
+                GameManager.instance.setMemberData(res);
+                SceneManager.instance.changeScene("OneSoju");
+                Debug.Log("request match res "+res);
             });
     }));
     }
