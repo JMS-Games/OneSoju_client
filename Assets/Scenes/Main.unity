@@ -1811,7 +1811,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isConnected: 0
   requestID: 0
-  socket: {fileID: 2055691188}
+  socket: {fileID: 0}
 --- !u!4 &2055691190
 Transform:
   m_ObjectHideFlags: 0
