@@ -67,17 +67,17 @@ public class SocketManager : MonoBehaviour {
         //     }
         // });
 
-        // socket.On(Sig.JOIN_ROOM,(e) => {
-        //     JSONObject res = e.data;
-        //
-        //     if(res.GetField("CODE").f==500){
-        //         //do nothing
-        //     } else if(res.GetField("CODE").f ==200){
-        //         // OneSojuUIController.
-        //         // GameManager.instance.Awake();
-        //         GameManager.instance.onJoinRoom(res);
-        //     }
-        // });
+        socket.On(Sig.JOIN_ROOM,(e) => {
+            JSONObject res = e.data;
+            Debug.Log("join_room "+res);
+            if(res.GetField("CODE").f==500){
+                //do nothing
+            } else if(res.GetField("CODE").f ==200){
+                // OneSojuUIController.
+                // GameManager.instance.Awake();
+                // GameManager.instance.onJoinRoom(res);
+            }
+        });
 
 
         // socket.On(Sig.REFRESH_ROOM,(e) => {
@@ -100,6 +100,7 @@ public class SocketManager : MonoBehaviour {
     public void connect(){
         if(socket == null){
             socket = this.GetComponent<SocketIOComponent>();
+            Debug.Log("register event");
             registerEvent();
 
         }
