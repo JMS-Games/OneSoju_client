@@ -570,6 +570,17 @@ public class JSONObject {
 
 		return null;
 	}
+	
+	public bool? GetBool(string name)
+	{
+		var obj = this.GetField(name);
+		if (obj is not null)
+		{
+			return obj.b;
+		}
+
+		return null;
+	}
 	public JSONObject GetField(string name) {
 		if(type == Type.OBJECT)
 			for(int i = 0; i < keys.Count; i++)

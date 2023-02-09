@@ -15,4 +15,5 @@ EditorBuildSettings:
     path: Assets/Scenes/OneSoju.unity
     guid: 1be84882da91a52439b2ada88905e20b
   m_configObjects:
+    com.unity.adaptiveperformance.loader_settings: {fileID: 11400000, guid: b10dba9ca19ab9848869f9ac04d903fd, type: 2}
     com.unity.adaptiveperformance.simulator.provider_settings: {fileID: 11400000, guid: aba8c022cada3cb40aaa519c78651d2f, type: 2}

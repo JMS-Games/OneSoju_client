@@ -7,12 +7,17 @@ public class ButtonEvent : MonoBehaviour {
 
     public void onMultiPlayClick(){
         SocketManager.instance.connect();
-        
+
+        PlayerContainer.instance.clear();
+        GameManager.instance.clear();
+
         StartCoroutine(SocketManager.instance.subLoadingUntilConnect(()=>{
             SocketManager.instance.requestSync(Sig.REQUEST_MATCH,
             new { uuid = SystemInfo.deviceUniqueIdentifier }, (res)=>
             {
-                GameManager.instance.setMemberData(res);
+                PlayerContainer.instance.initMember(res);
+                GameManager.instance.setMyInfo(res.GetField("myInfo"));
+                
                 SceneManager.instance.changeScene("OneSoju");
                 Debug.Log("request match res "+res);
             });

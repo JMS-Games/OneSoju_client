@@ -74,8 +74,7 @@ public class SocketManager : MonoBehaviour {
                 //do nothing
             } else if(res.GetField("CODE").f ==200){
                 // OneSojuUIController.
-                // GameManager.instance.Awake();
-                // GameManager.instance.onJoinRoom(res);
+                GameManager.instance.onJoinRoom(res);
             }
         });
 
@@ -191,6 +190,27 @@ public class SocketManager : MonoBehaviour {
         
     }
 
+    public void notify(int sig, object obj){
+        if(instance is null){
+            UnityEngine.SceneManagement.SceneManager.LoadScene("main");
+        }
+        this.Emit(sig, Util.getJSON(obj));
+        
+    }
+
+    
+    public void request(int sig, object obj, Action<JSONObject> callback){
+        if(instance is null){
+            UnityEngine.SceneManagement.SceneManager.LoadScene("main");
+        }
+        this.Emit(sig, Util.getJSON(obj),(e) => 
+            {
+                Debug.Log("#request response "+e.ToString());
+                callback(e[0]);
+            }
+        );
+    }
+    
     public void requestSync(int sig, object obj, Action<JSONObject> callback){
         if(instance is null){
             UnityEngine.SceneManagement.SceneManager.LoadScene("main");

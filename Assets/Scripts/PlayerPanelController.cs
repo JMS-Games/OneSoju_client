@@ -7,7 +7,7 @@ using SocketIO;
 using TMPro;
 public class PlayerPanelController : MonoBehaviour {
 
-    public int playerID;
+    public int uuid;
     public int playerRank;
     public bool isComplete;
     public bool isMaster;
@@ -33,7 +33,7 @@ public class PlayerPanelController : MonoBehaviour {
     }
 
     public void setData(JSONObject data){
-        this.playerID = data.GetField("playerID") != null ? data.GetField("playerID").i : this.playerID;
+        this.uuid = data.GetField("uuid") != null ? data.GetField("uuid").i : this.uuid;
         this.playerRank = data.GetField("playerRank") != null ? data.GetField("playerRank").i : this.playerRank;
         this.isComplete = data.GetField("isComplete") != null ? data.GetField("isComplete").b : this.isComplete;
         this.isMaster = data.GetField("isMaster") != null ? data.GetField("isMaster").b : this.isMaster;

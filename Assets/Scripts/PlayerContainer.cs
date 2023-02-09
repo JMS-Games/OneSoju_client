@@ -15,6 +15,8 @@ public class PlayerContainer : MonoBehaviour {
 
     List<GameMember> container = new List<GameMember>();
 
+    public string myID;
+
 
 
 
@@ -31,19 +33,30 @@ public class PlayerContainer : MonoBehaviour {
             Destroy(this.gameObject);
         }
         
-        GameManager.instance.AwakeGameManager();
+        // GameManager.instance.AwakeGameManager();
 
-        this.initMember();
+        // this.initMember();
+
+    }
+    
+    public void clear()
+    {
+        myID = null;
+        container.Clear();
 
     }
 
-    void initMember()
+    public void setMyID(string myID)
     {
-        var memberList = GameManager.instance.getInitMember();
-        
-        for(var i = 0; i<memberList.Count; i++){
-            this.joinMember(memberList[i]);
+        this.myID = myID;
+    }
+
+    public void initMember(JSONObject res)
+    {
+        for(var i = 0; i<res.Count; i++){
+            this.joinMember(res[i]);
         }
+        
     }
     void Start(){
     
@@ -51,7 +64,7 @@ public class PlayerContainer : MonoBehaviour {
 
     public GameMember getMemberByID(string id){
         foreach(GameMember m in container){
-            if(m.playerID == id){
+            if(m.uuid == id){
                 return m;
             }
         }
@@ -65,13 +78,53 @@ public class PlayerContainer : MonoBehaviour {
     }
 
     public void joinMember(JSONObject res){
-        var playerID = res.GetInt("id");
-        if (playerID is not null)
-        {
-            GameMember m = new GameMember(res);
-            this.container.Add(m);
+        var uuid = res.GetString("uuid");
 
+        if (uuid is null)
+        {
+            var id  = res.GetInt("uuid");
+            if (id is not null)
+            {
+                uuid = (string)(id+"");
+            }
+        }
+        
+        
+        if (uuid is not null)
+        {
+
+            if (getMemberByID(uuid) is null)
+            {
+                GameMember m = new GameMember(res);
+                this.container.Add(m);
+            
+                Debug.Log("join member complete "+uuid);
+
+            }
+            else
+            {
+                Debug.Log("already exist"+uuid);
+            }
+            
         }
 
+    }
+
+    public int getSize()
+    {
+        return this.container.Count;
+    }
+
+    public GameMember getMine()
+    {
+        Debug.Log("get Mine ");
+        foreach(GameMember m in container){
+            Debug.Log(m.uuid + " / " + this.myID);
+            if(m.uuid == this.myID){
+                return m;
+            }
+        }
+
+        return null;
     }
 }

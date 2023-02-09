@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using JetBrains.Annotations;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,12 +12,12 @@ using SocketIO;
 using TMPro;
 public class GameMember {
 
-    public string playerID;
-    public int cardLeft;
-    public int rank;
-    public bool isComplete;
-    public bool isMaster;
-    public bool isTurn;
+    [CanBeNull] public string uuid;
+    public int? cardLeft;
+    public int? rank;
+    public bool? isComplete;
+    public bool isAdmin;
+    public bool? isTurn;
 
     
 
@@ -24,11 +25,28 @@ public class GameMember {
 
     public GameMember(JSONObject res)
     {
-        playerID = res.GetString("id");
+        
+        var uuid = res.GetString("uuid");
+
+        if (uuid is null)
+        {
+            var id  = res.GetInt("uuid");
+            if (id is not null)
+            {
+                uuid = (string)(id+"");
+            }
+        }
+        
+        this.uuid = uuid;
+        
+        isAdmin = res.GetBool("isAdmin") ?? false;
+        
+
+
     }
 
     void setMemberData(JSONObject res){
-
+        
     }
     
 }

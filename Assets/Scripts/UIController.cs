@@ -10,10 +10,15 @@ using UnityEngine.EventSystems;
 
 using SocketIO;
 using TMPro;
+using Unity.VisualScripting;
+
 public class UIController : MonoBehaviour {
 
-    Button btnEndTurn;
+    Button btnDraw;
     Button btnExit;
+    private Button btnStart;
+
+    private PlayerContainer container;
     UIController(){
 
     }
@@ -21,20 +26,44 @@ public class UIController : MonoBehaviour {
     void Awake(){
         var canvas = this.transform;
 
-        this.btnEndTurn = canvas.Find("btnEndTurn").GetComponent<Button>();
+        this.btnDraw = canvas.Find("btnDraw").GetComponent<Button>();
         this.btnExit = canvas.Find("btnExit").GetComponent<Button>();
+        this.btnStart = canvas.Find("btnStart").GetComponent<Button>();
 
-
+        this.btnStart.gameObject.SetActive(false);
+        
+        var my = PlayerContainer.instance.getMine();
+        if (my.isAdmin)
+        {
+            this.btnStart.gameObject.SetActive(true);
+        }
+        
         this.initBtn();
+
+        container = GameObject.Find("PlayerContainer").GetComponent<PlayerContainer>();
     }
 
     void initBtn(){
-        this.btnEndTurn.onClick.AddListener(delegate{onBtnEndTurnClick();});
+        this.btnDraw.onClick.AddListener(delegate{onBtnDrawClick();});
         this.btnExit.onClick.AddListener(delegate{onBtnExitClick();});
+        this.btnStart.onClick.AddListener(delegate { onBtnStartClick();});
+        
+
     }
 
-    void onBtnEndTurnClick(){
+    void onBtnStartClick(){
+        //내가 방장인지 체크 필요
+        var my = PlayerContainer.instance.getMine();
+        if (!my.isAdmin)
+        {
+            return;
+        }
         
+        SocketManager.instance.notify(Sig.START_GAME, new {});
+    }
+    
+    void onBtnDrawClick(){
+        SocketManager.instance.notify(Sig.DRAW_CARD, new {});
     }
 
     void onBtnExitClick(){
@@ -43,8 +72,12 @@ public class UIController : MonoBehaviour {
             SceneManager.instance.changeScene("Main");
             SocketManager.instance.disconnect();
         });
-    }    
-    
+    }
+
+    public void refreshUser()
+    {
+        Debug.Log("refresh user "+container.getSize());
+    }
     void Start(){
 
     }
