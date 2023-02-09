@@ -71,7 +71,10 @@ public class UIController : MonoBehaviour {
     }
     
     void onBtnDrawClick(){
-        SocketManager.instance.notify(Sig.DRAW_CARD, new {});
+        SocketManager.instance.requestSync(Sig.DRAW_CARD, new {}, (res) =>
+        {
+            
+        });
     }
 
     void onBtnExitClick(){
