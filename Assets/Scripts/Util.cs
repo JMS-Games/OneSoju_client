@@ -26,6 +26,16 @@ public static class Util {
         
     }
 
+    public static bool checkError(JSONObject res)
+    {
+        if (res.GetField("CODE").f != 200)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     // public static Dictionary<string,string> getDict(JSONObject obj){
     //     return JsonConvert.DeserializeObject<Dictionary<string,string>>(obj.ToString());
     // }

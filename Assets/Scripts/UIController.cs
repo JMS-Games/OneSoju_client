@@ -59,7 +59,15 @@ public class UIController : MonoBehaviour {
             return;
         }
         
-        SocketManager.instance.notify(Sig.START_GAME, new {});
+        SocketManager.instance.requestSync(Sig.START_GAME, new {}, (res) =>
+        {
+            if (Util.checkError(res))
+            {
+                PopupController.instance.showPopup("start error");
+                return;
+            }
+            this.btnStart.gameObject.SetActive(false);
+        });
     }
     
     void onBtnDrawClick(){
