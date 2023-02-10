@@ -549,6 +549,7 @@ public class JSONObject {
 		if(fail != null) fail.Invoke(name);
 	}
 
+	//return string value from 'string or int' value
 	public string GetValue(string name)
 	{
 		
