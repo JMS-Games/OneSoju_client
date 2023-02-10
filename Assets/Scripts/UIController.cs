@@ -78,11 +78,8 @@ public class UIController : MonoBehaviour {
     }
 
     void onBtnExitClick(){
-        SocketManager.instance.requestSync(Sig.EXIT_ROOM, new {}, (res) =>
-        {
-            SceneManager.instance.changeScene("Main");
-            SocketManager.instance.disconnect();
-        });
+        SocketManager.instance.disconnect();
+        SceneManager.instance.changeScene("Main");
     }
 
     public void refreshUser()
