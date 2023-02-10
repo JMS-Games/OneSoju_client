@@ -77,6 +77,25 @@ public class PlayerContainer : MonoBehaviour {
         }
     }
 
+    public void updateMember(JSONObject res)
+    {
+        Debug.Log("player container updateMember"+res);
+        var uuid = res.GetValue("uuid");
+        
+        if (uuid is not null)
+        {
+
+            if (getMemberByID(uuid) is not null)
+            {
+                Debug.Log("update member "+uuid);
+
+                var m = getMemberByID(uuid);
+                m.updateMemberData(res);
+            }
+            
+        }
+
+    }
     public void joinMember(JSONObject res){
         Debug.Log("player container joinMember"+res);
         var uuid = res.GetValue("uuid");
@@ -94,7 +113,10 @@ public class PlayerContainer : MonoBehaviour {
             }
             else
             {
-                Debug.Log("already exist"+uuid);
+                Debug.Log("already exist, update"+uuid);
+
+                var m = getMemberByID(uuid);
+                m.updateMemberData(res);
             }
             
         }
