@@ -549,6 +549,23 @@ public class JSONObject {
 		if(fail != null) fail.Invoke(name);
 	}
 
+	public string GetValue(string name)
+	{
+		
+		var val = this.GetString(name);
+
+		if (val is null)
+		{
+			var val2  = this.GetInt(name);
+			if (val2 is not null)
+			{
+				val = (string)(val2+"");
+			}
+		}
+		
+
+		return val;
+	}
 	public string GetString(string name)
 	{
 		var obj = this.GetField(name);

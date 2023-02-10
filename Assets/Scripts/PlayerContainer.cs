@@ -79,17 +79,7 @@ public class PlayerContainer : MonoBehaviour {
 
     public void joinMember(JSONObject res){
         Debug.Log("player container joinMember"+res);
-        var uuid = res.GetString("uuid");
-
-        if (uuid is null)
-        {
-            var id  = res.GetInt("uuid");
-            if (id is not null)
-            {
-                uuid = (string)(id+"");
-            }
-        }
-        
+        var uuid = res.GetValue("uuid");
         
         if (uuid is not null)
         {

@@ -111,16 +111,7 @@ public class GameManager : MonoBehaviour {
     {
         var target = res.GetField("player");
         
-        var uuid = target.GetString("uuid");
-
-        if (uuid is null)
-        {
-            var id  = target.GetInt("uuid");
-            if (id is not null)
-            {
-                uuid = (string)(id+"");
-            }
-        }
+        var uuid = target.GetValue("uuid");
         
         PlayerContainer.instance.removeMember(uuid);
 

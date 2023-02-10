@@ -15,7 +15,7 @@ public class ButtonEvent : MonoBehaviour {
             SocketManager.instance.requestSync(Sig.REQUEST_MATCH,
             new { uuid = SystemInfo.deviceUniqueIdentifier }, (res)=>
             {
-                PlayerContainer.instance.initMember(res);
+                PlayerContainer.instance.initMember(res.GetField("players"));
                 GameManager.instance.setMyInfo(res.GetField("myInfo"));
                 
                 SceneManager.instance.changeScene("OneSoju");

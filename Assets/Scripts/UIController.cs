@@ -157,7 +157,7 @@ public class UIController : MonoBehaviour {
 
             var con = inst.GetComponent<PlayerPanelController>();
 
-            // con.setData(m);
+            con.setData(m);
 
 
         }

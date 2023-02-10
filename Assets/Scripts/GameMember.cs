@@ -10,15 +10,25 @@ using UnityEngine.EventSystems;
 
 using SocketIO;
 using TMPro;
-public class GameMember {
+public class GameMember
+{
 
-    [CanBeNull] public string uuid;
-    public int? cardLeft;
-    public int? rank;
-    public bool? isComplete;
+    public string id;
+    public string uuid;
+    public int roomID;
+
+    // public int cardLeft;
+    // public bool isComplete;
     public bool isAdmin;
-    public bool? isTurn;
 
+    public bool isTurn;
+    
+    public List<Card> hand;
+    public int leftHand;
+    public int rank;
+
+    public bool onPlaying;
+    
     
 
 
@@ -26,16 +36,7 @@ public class GameMember {
     public GameMember(JSONObject res)
     {
         
-        var uuid = res.GetString("uuid");
-
-        if (uuid is null)
-        {
-            var id  = res.GetInt("uuid");
-            if (id is not null)
-            {
-                uuid = (string)(id+"");
-            }
-        }
+        var uuid = res.GetValue("uuid");
         
         this.uuid = uuid;
         

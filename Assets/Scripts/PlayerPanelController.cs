@@ -5,17 +5,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using SocketIO;
 using TMPro;
-public class PlayerPanelController : MonoBehaviour {
-
-    public int uuid;
-    public int playerRank;
-    public bool isComplete;
-    public bool isMaster;
-    public bool isTurn;
-    public int leftTime;
-    public int leftCard;
-    
-
+public class PlayerPanelController : MonoBehaviour
+{
+    private GameMember m;
     
 
 
@@ -32,15 +24,10 @@ public class PlayerPanelController : MonoBehaviour {
 
     }
 
-    public void setData(JSONObject data){
-        this.uuid = data.GetField("uuid") != null ? data.GetField("uuid").i : this.uuid;
-        this.playerRank = data.GetField("playerRank") != null ? data.GetField("playerRank").i : this.playerRank;
-        this.isComplete = data.GetField("isComplete") != null ? data.GetField("isComplete").b : this.isComplete;
-        this.isMaster = data.GetField("isMaster") != null ? data.GetField("isMaster").b : this.isMaster;
-        this.isTurn = data.GetField("isTurn") != null ? data.GetField("isTurn").b : this.isTurn;
-        this.leftTime = data.GetField("leftTime") != null ? data.GetField("leftTime").i : this.leftTime;
-        this.leftCard = data.GetField("leftCard") != null ? data.GetField("leftCard").i : this.leftCard;
-
+    public void setData(GameMember m)
+    {
+        this.m = m;
+        
         this.setUI();
     }
 
@@ -69,7 +56,7 @@ public class PlayerPanelController : MonoBehaviour {
     }
 
     void setUI(){
-
+        lbPlayerName.SetText(m.uuid);
     }
 
     
