@@ -11,6 +11,8 @@ public class SocketManager : MonoBehaviour {
     public int requestID;
 
     public SocketIOComponent socket = null;
+
+    public bool canShowSubloading = true;
     void Awake(){
         
         if(instance == null){
@@ -30,11 +32,18 @@ public class SocketManager : MonoBehaviour {
     }
 
     public IEnumerator subLoadingUntilConnect(Action cb){
-        SubLoading.instance.showSubLoading();
+        if (canShowSubloading)
+        {
+            SubLoading.instance.showSubLoading();
+        }
         for(;;){
             if(this.socket.socket.IsConnected){
                 Debug.Log("소켓 연결 완료 ");
-                SubLoading.instance.endSubLoading();
+                if (canShowSubloading)
+                {
+                    SubLoading.instance.endSubLoading();
+                }
+
                 cb();
                 yield return null;
                 break;

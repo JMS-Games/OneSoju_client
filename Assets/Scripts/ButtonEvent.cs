@@ -10,6 +10,8 @@ public class ButtonEvent : MonoBehaviour {
 
         PlayerContainer.instance.clear();
         GameManager.instance.clear();
+        
+        SocketManager.instance.canShowSubloading = true;
 
         StartCoroutine(SocketManager.instance.subLoadingUntilConnect(()=>{
             SocketManager.instance.requestSync(Sig.REQUEST_MATCH,

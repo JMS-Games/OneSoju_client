@@ -110,7 +110,9 @@ public class UIController : MonoBehaviour {
         });
     }
 
-    void onBtnExitClick(){
+    void onBtnExitClick()
+    {
+        SocketManager.instance.canShowSubloading = false;
         SocketManager.instance.disconnect();
         SceneManager.instance.changeScene("Main");
     }
