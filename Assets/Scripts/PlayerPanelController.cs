@@ -45,7 +45,7 @@ public class PlayerPanelController : MonoBehaviour {
     }
 
     void Awake(){
-        var canvas = this.transform.Find("Canvas");
+        var canvas = this.transform;
 
         this.imgPlayer = canvas.Find("imgPlayer").GetComponent<Image>();
         this.imgTurn = canvas.Find("imgTurn").GetComponent<Image>();
@@ -58,11 +58,14 @@ public class PlayerPanelController : MonoBehaviour {
         this.lbPlayerName = canvas.Find("lbPlayerName").GetComponent<TextMeshProUGUI>();
         this.lbCardLeft = canvas.Find("lbCardLeft").GetComponent<TextMeshProUGUI>();
         this.lbRank = canvas.Find("lbRank").GetComponent<TextMeshProUGUI>();
+
+        this.transform.localPosition = new Vector3(0, 0,0);
     }
     
     
     void Start(){
-        
+        this.transform.localPosition = new Vector3(0, 0,0);
+
     }
 
     void setUI(){

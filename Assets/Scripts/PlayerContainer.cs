@@ -78,6 +78,7 @@ public class PlayerContainer : MonoBehaviour {
     }
 
     public void joinMember(JSONObject res){
+        Debug.Log("player container joinMember"+res);
         var uuid = res.GetString("uuid");
 
         if (uuid is null)
@@ -126,5 +127,10 @@ public class PlayerContainer : MonoBehaviour {
         }
 
         return null;
+    }
+
+    public List<GameMember> getMemberList()
+    {
+        return this.container;
     }
 }

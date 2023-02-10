@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Net.Sockets;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,11 +20,28 @@ public class UIController : MonoBehaviour {
     private Button btnStart;
 
     private PlayerContainer container;
+
+    private Transform posMe;
+    
+    private Transform posPlayer1;
+    private Transform posPlayer2;
+    private Transform posPlayer3;
+    
+    private Transform posHand;
+    private Transform posDeque;
+    private Transform posSideDeque;
+    
+    
     UIController(){
 
     }
 
     void Awake(){
+        if (PlayerContainer.instance is null)
+        {
+            UnityEngine.SceneManagement.SceneManager.LoadScene("Main");
+            return;
+        }
         var canvas = this.transform;
 
         this.btnDraw = canvas.Find("btnDraw").GetComponent<Button>();
@@ -31,6 +49,7 @@ public class UIController : MonoBehaviour {
         this.btnStart = canvas.Find("btnStart").GetComponent<Button>();
 
         this.btnStart.gameObject.SetActive(false);
+        this.btnDraw.gameObject.SetActive(false);
         
         var my = PlayerContainer.instance.getMine();
         if (my.isAdmin)
@@ -41,6 +60,20 @@ public class UIController : MonoBehaviour {
         this.initBtn();
 
         container = GameObject.Find("PlayerContainer").GetComponent<PlayerContainer>();
+
+
+        posMe = canvas.Find("posMe");
+        
+        posPlayer1 = canvas.Find("posPlayer1");
+        posPlayer2 = canvas.Find("posPlayer2");
+        posPlayer3= canvas.Find("posPlayer3");
+        
+        posHand = canvas.Find("posHand");
+        posDeque = canvas.Find("posDeque");
+        posSideDeque = canvas.Find("posSideDeque");
+        
+        GameManager.instance.AwakeGameManager();
+
     }
 
     void initBtn(){
@@ -85,9 +118,52 @@ public class UIController : MonoBehaviour {
     public void refreshUser()
     {
         Debug.Log("refresh user "+container.getSize());
+        var pCount = 0;
+        Transform target = null;
+        
+        var panel = Resources.Load("PlayerPanel");
+        
+        posPlayer1.DetachChildren();
+        posPlayer2.DetachChildren();
+        posPlayer3.DetachChildren();
+        
+        foreach (var m in container.getMemberList())
+        {
+            if (container.getMine() == m)
+            {
+                target = posMe;
+            }
+            else
+            {
+                switch (pCount)
+                {
+                    case 0:
+                        target = posPlayer1;
+                        break;
+                    case 1:
+                        target = posPlayer2;
+                        break;
+                    case 2:
+                        target = posPlayer3;
+                        break;
+                }
+                pCount++;
+            }
+
+            Debug.Log(pCount +" / "+target.name);
+            target.DetachChildren();
+            var inst = (GameObject) GameObject.Instantiate( panel , Vector3.zero, Quaternion.identity);
+            inst.transform.SetParent(target);
+
+            var con = inst.GetComponent<PlayerPanelController>();
+
+            // con.setData(m);
+
+
+        }
     }
     void Start(){
-
+        this.refreshUser();
     }
 
     

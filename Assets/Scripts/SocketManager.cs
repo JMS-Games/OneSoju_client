@@ -71,12 +71,30 @@ public class SocketManager : MonoBehaviour {
             JSONObject res = e.data;
             Debug.Log("join_room "+res);
             if(res.GetField("CODE").f==500){
-                //do nothing
+                Debug.Log("join_room fail");//do nothing
+                
             } else if(res.GetField("CODE").f ==200){
                 // OneSojuUIController.
+                Debug.Log("join_room success");//do nothing
+
                 GameManager.instance.onJoinRoom(res);
             }
         });
+        
+        socket.On(Sig.EXIT_ROOM,(e) => {
+            JSONObject res = e.data;
+            Debug.Log("exit_room "+res);
+            if(res.GetField("CODE").f==500){
+                Debug.Log("exit_room fail");//do nothing
+                
+            } else if(res.GetField("CODE").f ==200){
+                // OneSojuUIController.
+                Debug.Log("exit_room success");//do nothing
+
+                GameManager.instance.onExitRoom(res);
+            }
+        });
+
 
 
         // socket.On(Sig.REFRESH_ROOM,(e) => {

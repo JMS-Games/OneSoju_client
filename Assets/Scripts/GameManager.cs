@@ -102,13 +102,29 @@ public class GameManager : MonoBehaviour {
     }
 
     public void onJoinRoom(JSONObject res){
-        PlayerContainer.instance.joinMember(res);
+        PlayerContainer.instance.joinMember(res.GetField("player"));
 
         ui.refreshUser();
     }
 
-    public void onExitRoom(JSONObject res){
+    public void onExitRoom(JSONObject res)
+    {
+        var target = res.GetField("player");
+        
+        var uuid = target.GetString("uuid");
 
+        if (uuid is null)
+        {
+            var id  = target.GetInt("uuid");
+            if (id is not null)
+            {
+                uuid = (string)(id+"");
+            }
+        }
+        
+        PlayerContainer.instance.removeMember(uuid);
+
+        ui.refreshUser();
     }
 
     public void onYourTurn(JSONObject res){
