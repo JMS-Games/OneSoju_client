@@ -9,11 +9,13 @@ using UnityEngine.EventSystems;
 
 using SocketIO;
 using TMPro;
+
 public class PlayerContainer : MonoBehaviour {
 
     public static PlayerContainer instance = null;
 
-    List<GameMember> container = new List<GameMember>();
+    
+    public List<GameMember> container = new List<GameMember>();
 
     public string myID;
 

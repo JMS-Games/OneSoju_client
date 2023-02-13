@@ -124,13 +124,23 @@ public class UIController : MonoBehaviour {
         Transform target = null;
         
         var panel = Resources.Load("PlayerPanel");
-        
-        posPlayer1.DetachChildren();
-        posPlayer2.DetachChildren();
-        posPlayer3.DetachChildren();
+
+        foreach (GameObject child in posPlayer1)
+        {
+            Destroy(child);
+        }
+        foreach (GameObject child in posPlayer2)
+        {
+            Destroy(child);
+        }
+        foreach (GameObject child in posPlayer3)
+        {
+            Destroy(child);
+        }
         
         foreach (var m in container.getMemberList())
         {
+            Debug.Log("m = "+m.uuid);
             if (container.getMine() == m)
             {
                 target = posMe;
@@ -153,7 +163,11 @@ public class UIController : MonoBehaviour {
             }
 
             Debug.Log(pCount +" / "+target.name);
-            target.DetachChildren();
+            foreach (GameObject child in target)
+            {
+                Destroy(child);
+            }
+            
             var inst = (GameObject) GameObject.Instantiate( panel , Vector3.zero, Quaternion.identity);
             inst.transform.SetParent(target);
 

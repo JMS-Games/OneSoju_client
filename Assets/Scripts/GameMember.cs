@@ -12,6 +12,7 @@ using SocketIO;
 using TMPro;
 using Unity.VisualScripting.Antlr3.Runtime;
 
+[System.Serializable]
 public class GameMember
 {
 

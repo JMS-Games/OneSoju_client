@@ -21,12 +21,14 @@ public class GameManager : MonoBehaviour {
 
     public string myID;
     
-    public bool isGameStarted;
-    public int headCount; //플레이어 수
+    public bool isGameStarted = false;
+    public int headCount = 0; //플레이어 수
 
-    public JSONObject myHand; //내 핸드
+    public List<Card> myHand; //내 핸드
 
-    public int curTurn; 
+    public int curTurn;
+
+    public Card currentCard;
     
     
 
@@ -98,23 +100,33 @@ public class GameManager : MonoBehaviour {
         ui.refreshUser();
     }
 
-    public void onStartGame(JSONObject res){
+    public void onStartGame(JSONObject res)
+    {
+        var myCards = res.GetField("yourHand");
+        myHand = new List<Card>();
+        
+        for (var i = 0; i < myCards.Count; i++)
+        {
+            myHand.Add(new Card(myCards[i]));
+        }
 
+        currentCard = new Card(res.GetField("currentCard"));
+        
     }
     
     public void onYourTurn(JSONObject res){
-
+        
     }
 
     public void onUseResult(JSONObject res){
-
+        
     }
 
     public void onSomeoneWin(JSONObject res){
-
+        
     }
     public void onEndGame(JSONObject res){
-
+        
     }
 
 }

@@ -38,7 +38,7 @@ public class SocketManager : MonoBehaviour {
         }
         for(;;){
             if(this.socket.socket.IsConnected){
-                Debug.Log("소켓 연결 완료 ");
+                //debug.log("소켓 연결 완료 ");
                 if (canShowSubloading)
                 {
                     SubLoading.instance.endSubLoading();
@@ -54,18 +54,18 @@ public class SocketManager : MonoBehaviour {
     }
     public void registerEvent(){
         if(socket == null){
-            Debug.LogError("소켓이 null이라 event register에 실패함");
+            //debug.logError("소켓이 null이라 event register에 실패함");
             return;
         }
 
         socket.On(Sig.START_GAME,(e) => {
             JSONObject res = e.data;
-            Debug.Log("START_GAME "+res);
+            //debug.log("START_GAME "+res);
             if(res.GetInt("CODE")==500){
-                Debug.Log("START_GAME fail");//do nothing
+                //debug.log("START_GAME fail");//do nothing
                 
             } else if(res.GetInt("CODE") ==200){
-                Debug.Log("START_GAME success");//do nothing
+                //debug.log("START_GAME success");//do nothing
 
                 GameManager.instance.onStartGame(res);
             }
@@ -74,12 +74,12 @@ public class SocketManager : MonoBehaviour {
         
         socket.On(Sig.JOIN_ROOM,(e) => {
             JSONObject res = e.data;
-            Debug.Log("join_room "+res);
+            //debug.log("join_room "+res);
             if(res.GetInt("CODE")==500){
-                Debug.Log("join_room fail");//do nothing
+                //debug.log("join_room fail");//do nothing
                 
             } else if(res.GetInt("CODE") ==200){
-                Debug.Log("join_room success");//do nothing
+                //debug.log("join_room success");//do nothing
 
                 GameManager.instance.onJoinRoom(res);
             }
@@ -87,12 +87,12 @@ public class SocketManager : MonoBehaviour {
         
         socket.On(Sig.EXIT_ROOM,(e) => {
             JSONObject res = e.data;
-            Debug.Log("exit_room "+res);
+            //debug.log("exit_room "+res);
             if(res.GetInt("CODE")==500){
-                Debug.Log("exit_room fail");//do nothing
+                //debug.log("exit_room fail");//do nothing
                 
             } else if(res.GetInt("CODE") ==200){
-                Debug.Log("exit_room success");//do nothing
+                //debug.log("exit_room success");//do nothing
 
                 GameManager.instance.onExitRoom(res);
             }
@@ -100,12 +100,12 @@ public class SocketManager : MonoBehaviour {
 
         socket.On(Sig.YOUR_TURN,(e) => {
             JSONObject res = e.data;
-            Debug.Log("your_turn "+res);
+            //debug.log("your_turn "+res);
             if(res.GetInt("CODE")==500){
-                Debug.Log("your_turn fail");//do nothing
+                //debug.log("your_turn fail");//do nothing
                 
             } else if(res.GetInt("CODE") ==200){
-                Debug.Log("your_turn success");//do nothing
+                //debug.log("your_turn success");//do nothing
 
                 GameManager.instance.onYourTurn(res);
             }
@@ -113,12 +113,12 @@ public class SocketManager : MonoBehaviour {
 
         socket.On(Sig.USE_RESULT,(e) => {
             JSONObject res = e.data;
-            Debug.Log("your_turn "+res);
+            //debug.log("your_turn "+res);
             if(res.GetInt("CODE")==500){
-                Debug.Log("your_turn fail");//do nothing
+                //debug.log("your_turn fail");//do nothing
                 
             } else if(res.GetInt("CODE") ==200){
-                Debug.Log("your_turn success");//do nothing
+                //debug.log("your_turn success");//do nothing
 
                 GameManager.instance.onUseResult(res);
             }
@@ -126,12 +126,12 @@ public class SocketManager : MonoBehaviour {
         
         socket.On(Sig.SOMEONE_WIN,(e) => {
             JSONObject res = e.data;
-            Debug.Log("your_turn "+res);
+            //debug.log("your_turn "+res);
             if(res.GetInt("CODE")==500){
-                Debug.Log("your_turn fail");//do nothing
+                //debug.log("your_turn fail");//do nothing
                 
             } else if(res.GetInt("CODE") ==200){
-                Debug.Log("your_turn success");//do nothing
+                //debug.log("your_turn success");//do nothing
 
                 GameManager.instance.onSomeoneWin(res);
             }
@@ -139,13 +139,13 @@ public class SocketManager : MonoBehaviour {
         
         socket.On(Sig.END_GAME,(e) => {
             JSONObject res = e.data;
-            Debug.Log("your_turn "+res);
+            //debug.log("your_turn "+res);
             if(res.GetField("CODE").f==500){
-                Debug.Log("your_turn fail");//do nothing
+                //debug.log("your_turn fail");//do nothing
                 
             } else if(res.GetField("CODE").f ==200){
                 // OneSojuUIController.
-                Debug.Log("your_turn success");//do nothing
+                //debug.log("your_turn success");//do nothing
 
                 GameManager.instance.onEndGame(res);
             }
@@ -157,7 +157,7 @@ public class SocketManager : MonoBehaviour {
     public void connect(){
         if(socket == null){
             socket = this.GetComponent<SocketIOComponent>();
-            Debug.Log("register event");
+            //debug.log("register event");
             registerEvent();
 
         }
@@ -175,7 +175,7 @@ public class SocketManager : MonoBehaviour {
 
     private void SocketOpened(object sender, System.EventArgs e)
     {
-        Debug.Log("Socket Opened");
+        //debug.log("Socket Opened");
     }
 
 
@@ -263,7 +263,7 @@ public class SocketManager : MonoBehaviour {
         }
         this.Emit(sig, Util.getJSON(obj),(e) => 
             {
-                Debug.Log("#request response "+e.ToString());
+                //debug.log("#request response "+e.ToString());
                 callback(e[0]);
             }
         );
@@ -276,7 +276,7 @@ public class SocketManager : MonoBehaviour {
         SubLoading.instance.showSubLoading();
         this.Emit(sig, Util.getJSON(obj),(e) => 
             {
-                Debug.Log("request response "+e.ToString());
+                //debug.log("request response "+e.ToString());
                 SubLoading.instance.endSubLoading();
                 callback(e[0]);
             }
