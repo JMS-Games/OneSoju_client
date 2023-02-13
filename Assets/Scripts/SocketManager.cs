@@ -57,33 +57,28 @@ public class SocketManager : MonoBehaviour {
             Debug.LogError("소켓이 null이라 event register에 실패함");
             return;
         }
+
+        socket.On(Sig.START_GAME,(e) => {
+            JSONObject res = e.data;
+            Debug.Log("START_GAME "+res);
+            if(res.GetInt("CODE")==500){
+                Debug.Log("START_GAME fail");//do nothing
+                
+            } else if(res.GetInt("CODE") ==200){
+                Debug.Log("START_GAME success");//do nothing
+
+                GameManager.instance.onStartGame(res);
+            }
+        });
         
-        // socket.On(Sig.HAND_SHAKE,(e) => {
-        //     JSONObject res = e.data;
-        //     SubLoading.instance.endSubLoading();
-            
-            
-        //     // Debug.Log("결과 오브젝트"+ress.CODE);
-        //     Debug.Log("RESULT");
-        //     // Debug.Log(res.CODE);
-        //     if(res.GetField("CODE").f==500){
-        //         //do nothing
-        //     } else if(res.GetField("CODE").f ==200){
-        //         Player.create();
-        //         Player.nickname = res.GetField("nickname").str;
-
-        //         SceneManager.instance.changeScene("roomscene");
-        //     }
-        // });
-
+        
         socket.On(Sig.JOIN_ROOM,(e) => {
             JSONObject res = e.data;
             Debug.Log("join_room "+res);
-            if(res.GetField("CODE").f==500){
+            if(res.GetInt("CODE")==500){
                 Debug.Log("join_room fail");//do nothing
                 
-            } else if(res.GetField("CODE").f ==200){
-                // OneSojuUIController.
+            } else if(res.GetInt("CODE") ==200){
                 Debug.Log("join_room success");//do nothing
 
                 GameManager.instance.onJoinRoom(res);
@@ -93,33 +88,69 @@ public class SocketManager : MonoBehaviour {
         socket.On(Sig.EXIT_ROOM,(e) => {
             JSONObject res = e.data;
             Debug.Log("exit_room "+res);
-            if(res.GetField("CODE").f==500){
+            if(res.GetInt("CODE")==500){
                 Debug.Log("exit_room fail");//do nothing
                 
-            } else if(res.GetField("CODE").f ==200){
-                // OneSojuUIController.
+            } else if(res.GetInt("CODE") ==200){
                 Debug.Log("exit_room success");//do nothing
 
                 GameManager.instance.onExitRoom(res);
             }
         });
 
+        socket.On(Sig.YOUR_TURN,(e) => {
+            JSONObject res = e.data;
+            Debug.Log("your_turn "+res);
+            if(res.GetInt("CODE")==500){
+                Debug.Log("your_turn fail");//do nothing
+                
+            } else if(res.GetInt("CODE") ==200){
+                Debug.Log("your_turn success");//do nothing
 
+                GameManager.instance.onYourTurn(res);
+            }
+        });
 
-        // socket.On(Sig.REFRESH_ROOM,(e) => {
-        //     JSONObject res = e.data;
+        socket.On(Sig.USE_RESULT,(e) => {
+            JSONObject res = e.data;
+            Debug.Log("your_turn "+res);
+            if(res.GetInt("CODE")==500){
+                Debug.Log("your_turn fail");//do nothing
+                
+            } else if(res.GetInt("CODE") ==200){
+                Debug.Log("your_turn success");//do nothing
 
-        //     if(res.GetField("CODE").f==500){
-        //         //do nothing
-        //         SubLoading.instance.showErrorCanvas("Failed to refresh room info");
+                GameManager.instance.onUseResult(res);
+            }
+        });
+        
+        socket.On(Sig.SOMEONE_WIN,(e) => {
+            JSONObject res = e.data;
+            Debug.Log("your_turn "+res);
+            if(res.GetInt("CODE")==500){
+                Debug.Log("your_turn fail");//do nothing
+                
+            } else if(res.GetInt("CODE") ==200){
+                Debug.Log("your_turn success");//do nothing
 
-        //     } else if(res.GetField("CODE").f ==200){
-        //         if(SceneManager.instance != null && SceneManager.instance.getCurrentSceneName() == "roomscene"){
-        //             // RoomScene.setUI(res.roomInfo);
-        //             DispatchEventManager.instance.setRoomSceneUI(res.GetField("roomInfo"));
-        //         }
-        //     }
-        // });
+                GameManager.instance.onSomeoneWin(res);
+            }
+        });
+        
+        socket.On(Sig.END_GAME,(e) => {
+            JSONObject res = e.data;
+            Debug.Log("your_turn "+res);
+            if(res.GetField("CODE").f==500){
+                Debug.Log("your_turn fail");//do nothing
+                
+            } else if(res.GetField("CODE").f ==200){
+                // OneSojuUIController.
+                Debug.Log("your_turn success");//do nothing
+
+                GameManager.instance.onEndGame(res);
+            }
+        });
+        
     }
 
 

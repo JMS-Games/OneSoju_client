@@ -80,26 +80,6 @@ public class GameManager : MonoBehaviour {
         
         Debug.Log("my info "+res.GetField("uuid")+"/"+this.myID);
     }
-    public void setMemberData(JSONObject res)
-    {
-        // List<GameMember> m = new List<GameMember>();
-        //
-        // var p = res.GetField("players");
-        // for (var i = 0; i < p.Count;i++)
-        // {
-        //     GameMember mm = new GameMember(p[i]);
-        //     m.Add(mm);
-        // }
-
-        this.memberData = res;
-        
-        Debug.Log("memberData "+this.memberData);
-    }
-
-    public JSONObject getInitMember()
-    {
-        return this.memberData;
-    }
 
     public void onJoinRoom(JSONObject res){
         PlayerContainer.instance.joinMember(res.GetField("player"));
@@ -118,6 +98,10 @@ public class GameManager : MonoBehaviour {
         ui.refreshUser();
     }
 
+    public void onStartGame(JSONObject res){
+
+    }
+    
     public void onYourTurn(JSONObject res){
 
     }
@@ -126,6 +110,11 @@ public class GameManager : MonoBehaviour {
 
     }
 
-    
+    public void onSomeoneWin(JSONObject res){
+
+    }
+    public void onEndGame(JSONObject res){
+
+    }
 
 }
