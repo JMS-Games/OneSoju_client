@@ -102,6 +102,7 @@ public class GameManager : MonoBehaviour {
 
     public void onStartGame(JSONObject res)
     {
+        Debug.Log("onStartGame "+res);
         var myCards = res.GetField("yourHand");
         myHand = new List<Card>();
         
@@ -110,11 +111,15 @@ public class GameManager : MonoBehaviour {
             myHand.Add(new Card(myCards[i]));
         }
 
-        currentCard = new Card(res.GetField("currentCard"));
         
+        ui.setMyHand(myHand);
+
     }
     
     public void onYourTurn(JSONObject res){
+                
+        currentCard = new Card(res.GetField("currentCard"));
+        ui.setDequeCard(currentCard);
         
     }
 

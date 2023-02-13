@@ -4,9 +4,25 @@ using UnityEngine;
 using UnityEngine.UI;
 
 using Newtonsoft.Json;
-// using Chsword;
 
 public static class Util {
+
+    public static GameObject getInst(string name)
+    {
+        var res = Resources.Load(name);
+
+        var inst = (GameObject)GameObject.Instantiate(res, Vector3.zero, Quaternion.identity);
+
+        return inst;
+    }
+    
+    public static GameObject getInstByRes(Object obj)
+    {
+
+        var inst = (GameObject)GameObject.Instantiate(obj, Vector3.zero, Quaternion.identity);
+
+        return inst;
+    }
     
     public static JSONObject getJSON2(string str, params object[] args){
         foreach(var arg in args){

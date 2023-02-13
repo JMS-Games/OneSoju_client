@@ -9,9 +9,12 @@ public class CardController : MonoBehaviour {
 
     public int cardNum;
 
-    Image imgCard;
-    TextMeshProUGUI text;
-
+    private Image imgCard;
+    private TextMeshProUGUI lbText;
+    private TextMeshProUGUI lbMark;
+    
+    public Card card;
+    
     CardController(int cardNum){
         this.cardNum = cardNum;
     }
@@ -22,42 +25,60 @@ public class CardController : MonoBehaviour {
         
     }
 
+    public void setCard(Card card)
+    {
+        Debug.Log("setCard "+card);
+        this.card = card;
+        this.cardNum = (int)card.id;
+        this.initUI();
+    }
+    
     void initUI(){
         string shape = "";
 
-        switch(this.cardNum/13){
-            case 0:
+        switch(this.card.shape){
+            case "SPADE":
                 shape = "♠";
                 break;
-            case 1:
+            case "DIAMOND":
                 shape = "♦";
                 break;
-            case 2:
+            case "HEART":
                 shape = "♥";
                 break;
-            case 3:
+            case "CLOVER":
                 shape = "♣";
                 break;
-            case 4:
+            default:
                 shape = "JOKER";
                 break;
         }
 
-        string num = this.cardNum%13+"";
+        string num = this.card.value+"";
 
 
 
-        text.SetText(shape+" "+num);
+        lbText.SetText(shape+"\n"+num);
+        lbMark.SetText(shape+"");
+
+        if (this.card.shape == "HEART" || this.card.shape == "DIAMOND")
+        {
+            lbText.color = Color.red;
+            lbMark.color = Color.red;
+        }
+
     }
     void Awake(){
-        imgCard = this.transform.Find("Canvas").Find("Image").GetComponent<Image>();
-        text = this.transform.Find("Canvas").Find("lbCard").GetComponent<TextMeshProUGUI>();
+        imgCard = this.transform.Find("imgCard").GetComponent<Image>();
+        lbText = this.transform.Find("lbCard").GetComponent<TextMeshProUGUI>();
+        lbMark =  this.transform.Find("lbMark").GetComponent<TextMeshProUGUI>();
     }
     
     
     void Start(){
         //imgCard.sprite = 
         this.initUI();
+        
     }
 
     

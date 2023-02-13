@@ -182,6 +182,35 @@ public class UIController : MonoBehaviour {
         this.refreshUser();
     }
 
+    public void setMyHand(List<Card> cards)
+    {
+        this.posHand.GetComponent<HandController>().setUI(cards);
+    }
+
+    public void setDequeCard(Card card)
+    {
+        Debug.Log("setDequeCard "+card);
+        if (posDeque.childCount == 0)
+        {            
+            Debug.Log("setparent "+card);
+
+            var inst = Util.getInst("Card");
+            inst.transform.SetParent(posDeque);
+
+            inst.transform.localPosition = new Vector3(0, 0, 0);
+
+        }
+        else
+        {
+            Debug.Log("not null"+card);
+
+        }
+
+        var dequeCard = posDeque.GetChild(0).GetComponent<CardController>();
+        
+        dequeCard.setCard(card);
+    }
+
     
 
 }
