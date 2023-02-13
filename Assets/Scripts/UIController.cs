@@ -125,17 +125,17 @@ public class UIController : MonoBehaviour {
         
         var panel = Resources.Load("PlayerPanel");
 
-        foreach (GameObject child in posPlayer1)
+        foreach (Transform child in posPlayer1)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
-        foreach (GameObject child in posPlayer2)
+        foreach (Transform child in posPlayer2)
         {
-            Destroy(child);
-        }
-        foreach (GameObject child in posPlayer3)
+            Destroy(child.gameObject);
+        }        
+        foreach (Transform child in posPlayer3)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
         
         foreach (var m in container.getMemberList())
@@ -163,9 +163,9 @@ public class UIController : MonoBehaviour {
             }
 
             Debug.Log(pCount +" / "+target.name);
-            foreach (GameObject child in target)
+            foreach (Transform child in target)
             {
-                Destroy(child);
+                Destroy(child.gameObject);
             }
             
             var inst = (GameObject) GameObject.Instantiate( panel , Vector3.zero, Quaternion.identity);
