@@ -12,6 +12,7 @@ using UnityEngine.EventSystems;
 using SocketIO;
 using TMPro;
 using Unity.VisualScripting;
+using UnityEngine.XR;
 
 public class UIController : MonoBehaviour {
 
@@ -30,6 +31,10 @@ public class UIController : MonoBehaviour {
     private Transform posHand;
     private Transform posDeque;
     private Transform posSideDeque;
+
+    public HandController handController;
+    public CardController deque;
+    public CardController sideDeque;
     
     
     UIController(){
@@ -71,6 +76,9 @@ public class UIController : MonoBehaviour {
         posHand = canvas.Find("posHand");
         posDeque = canvas.Find("posDeque");
         posSideDeque = canvas.Find("posSideDeque");
+
+        handController = posHand.GetComponent<HandController>();
+        
         
         GameManager.instance.AwakeGameManager();
 
@@ -206,11 +214,16 @@ public class UIController : MonoBehaviour {
 
         }
 
-        var dequeCard = posDeque.GetChild(0).GetComponent<CardController>();
+        if (deque is null)
+        {
+            deque = posDeque.GetChild(0).GetComponent<CardController>();
+        }
         
-        dequeCard.setCard(card);
+        deque.setCard(card);
     }
 
-    
+
+
+
 
 }

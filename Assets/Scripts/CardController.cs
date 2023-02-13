@@ -5,7 +5,10 @@ using UnityEngine;
 using UnityEngine.UI;
 using SocketIO;
 using TMPro;
-public class CardController : MonoBehaviour {
+using Unity.VisualScripting;
+using UnityEngine.EventSystems;
+
+public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler {
 
     public int cardNum;
 
@@ -14,6 +17,8 @@ public class CardController : MonoBehaviour {
     private TextMeshProUGUI lbMark;
     
     public Card card;
+
+    public bool touchEnable = false;
     
     CardController(int cardNum){
         this.cardNum = cardNum;
@@ -81,6 +86,30 @@ public class CardController : MonoBehaviour {
         
     }
 
-    
 
+    public void OnBeginDrag(PointerEventData eventData)
+    {
+        GameManager.instance.ui.handController.onBeginDrag(this);
+    }
+
+    public void OnDrag(PointerEventData eventData)
+    {
+        GameManager.instance.ui.handController.onDrag(this);
+
+    }
+
+    public void OnEndDrag(PointerEventData eventData)
+    {
+        GameManager.instance.ui.handController.onEndDrag(this);
+
+    }
+    
+    public void OnDrop(PointerEventData eventData)
+    {
+        GameManager.instance.ui.handController.onDrop(this);
+
+    }
+
+  
+    
 }

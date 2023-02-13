@@ -12,7 +12,7 @@ using TMPro;
 public class GameManager : MonoBehaviour {
 
     public static GameManager instance = null;
-    UIController ui;
+    public UIController ui;
 
 
     private JSONObject memberData = null;
