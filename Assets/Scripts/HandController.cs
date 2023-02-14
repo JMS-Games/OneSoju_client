@@ -122,17 +122,36 @@ public class HandController : MonoBehaviour
             }
         }
 
-
-        if (hitComplete)
-        {
-            //서버로 보내자
-        }
-
         dragEnable = true;
         Destroy(dragTarget.gameObject);
         dragTarget = null;
         c.isDragging = false;
         dragging = false;
+        
+        
+        if (hitComplete)
+        {
+            //서버로 보내자
+            dragEnable = false;
+            
+            SocketManager.instance.request(Sig.USE_CARD, new { nextCard=c.card }, (res) =>
+            {
+                Debug.Log("use card result "+res);
+                if (Util.checkError(res))
+                {
+                    PopupController.instance.showPopup("use error");
+                    dragEnable = true;
+
+                    return;
+                }
+                
+                
+                
+                
+            });
+        }
+
+
     }
     public void onDrop(PointerEventData e, CardController c)
     {
