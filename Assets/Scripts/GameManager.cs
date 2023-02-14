@@ -120,7 +120,28 @@ public class GameManager : MonoBehaviour {
                 
         currentCard = new Card(res.GetField("currentCard"));
         ui.setDequeCard(currentCard);
+
+        var uuid = res.GetField("player").GetValue("uuid");
+        if (uuid == PlayerContainer.instance.getMine().uuid)
+        {
+            this.ui.handController.dragEnable = true;
+        }
+
+        var list = PlayerContainer.instance.getMemberList();
+        foreach (var m in list)
+        {
+            if (m.uuid == uuid)
+            {
+                m.isTurn = true;
+            }
+            else
+            {
+                m.isTurn = false;
+            }
+        }
         
+        ui.refreshUser();
+
     }
 
     public void onUseResult(JSONObject res){

@@ -207,6 +207,8 @@ public class UIController : MonoBehaviour {
 
             inst.transform.localPosition = new Vector3(0, 0, 0);
 
+            inst.AddComponent<BoxCollider2D>();
+
         }
         else
         {

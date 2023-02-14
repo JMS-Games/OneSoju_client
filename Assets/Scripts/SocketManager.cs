@@ -100,7 +100,7 @@ public class SocketManager : MonoBehaviour {
 
         socket.On(Sig.YOUR_TURN,(e) => {
             JSONObject res = e.data;
-            //debug.log("your_turn "+res);
+            Debug.Log("your_turn "+res);
             if(res.GetInt("CODE")==500){
                 //debug.log("your_turn fail");//do nothing
                 

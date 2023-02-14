@@ -356,6 +356,7 @@ GameObject:
   m_Component:
   - component: {fileID: 434804631423119010}
   - component: {fileID: 891126946886881347}
+  - component: {fileID: 5840732574554702012}
   m_Layer: 5
   m_Name: Card
   m_TagString: Untagged
@@ -399,3 +400,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cardNum: 0
+  imgCard: {fileID: 0}
+  lbText: {fileID: 0}
+  lbMark: {fileID: 0}
+  touchEnable: 0
+  isDragging: 0
+--- !u!65 &5840732574554702012
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8876183928088666691}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 200, y: 200, z: 200}
+  m_Center: {x: 0, y: 0, z: 0}

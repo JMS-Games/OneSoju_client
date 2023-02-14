@@ -12,13 +12,14 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public int cardNum;
 
-    private Image imgCard;
-    private TextMeshProUGUI lbText;
-    private TextMeshProUGUI lbMark;
+    public Image imgCard;
+    public TextMeshProUGUI lbText;
+    public TextMeshProUGUI lbMark;
     
     public Card card;
 
     public bool touchEnable = false;
+    public bool isDragging = false;
     
     CardController(int cardNum){
         this.cardNum = cardNum;
@@ -89,24 +90,24 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-        GameManager.instance.ui.handController.onBeginDrag(this);
+        GameManager.instance.ui.handController.onBeginDrag(eventData, this);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
-        GameManager.instance.ui.handController.onDrag(this);
+        GameManager.instance.ui.handController.onDrag(eventData, this);
 
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
-        GameManager.instance.ui.handController.onEndDrag(this);
+        GameManager.instance.ui.handController.onEndDrag(eventData, this);
 
     }
     
     public void OnDrop(PointerEventData eventData)
     {
-        GameManager.instance.ui.handController.onDrop(this);
+        GameManager.instance.ui.handController.onDrop(eventData, this);
 
     }
 

@@ -9,11 +9,21 @@ using UnityEngine.EventSystems;
 
 using SocketIO;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEditor;
 
 public class HandController : MonoBehaviour
 {
     private List<Card> cardList = new List<Card>();
+
+    public bool dragEnable = false;
+    public bool dragging = false;
+    private CardController dragTarget = null;
+
+    private Camera cam;
+    
+    GraphicRaycaster gr = null;
+
     HandController(){
         
     }
@@ -22,8 +32,9 @@ public class HandController : MonoBehaviour
         
     }
 
-    void Start(){
-        
+    void Start()
+    {
+        gr = GameObject.Find("Canvas").GetComponent<GraphicRaycaster>();
     }
 
     public void setUI(List<Card> cards)
@@ -54,20 +65,76 @@ public class HandController : MonoBehaviour
         }
     }
 
-    public void onBeginDrag(CardController c)
+    public void onBeginDrag(PointerEventData e, CardController c)
     {
+        if (!dragEnable)
+        {
+            return;
+        }
+
+        dragEnable = false;
+        c.isDragging = true;
+
+        var res = Resources.Load("Card");
+        var inst = Util.getInstByRes(res);
         
+        inst.transform.SetParent(this.transform);
+
+        dragTarget = inst.GetComponent<CardController>();
+        
+        dragTarget.setCard(c.card);
+
+        Debug.Log(dragTarget.imgCard);
+        dragTarget.imgCard.color = new Color(1,1,1,0.5f);
+
+
+        
+        
+
     }
 
-    public void onDrag(CardController c)
+    public void onDrag(PointerEventData e, CardController c)
     {
-        
+        if (!dragTarget)
+        {
+            return;
+        }
+
+        dragTarget.transform.position = e.position;
     }
-    public void onEndDrag(CardController c)
+    public void onEndDrag(PointerEventData e, CardController c)
     {
+        bool hitComplete = false;
+        PointerEventData ped;
+
+        ped = new PointerEventData(null);
         
+        ped.position = Input.mousePosition;
+        List<RaycastResult> results = new List<RaycastResult>();
+        gr.Raycast(ped, results);
+
+        for (int i = 0; i < results.Count; i++)
+        {
+            if (results[i].gameObject.transform.parent.parent.name == "posDeque")
+            {
+                hitComplete = true;
+                break;
+            }
+        }
+
+
+        if (hitComplete)
+        {
+            //서버로 보내자
+        }
+
+        dragEnable = true;
+        Destroy(dragTarget.gameObject);
+        dragTarget = null;
+        c.isDragging = false;
+        dragging = false;
     }
-    public void onDrop(CardController c)
+    public void onDrop(PointerEventData e, CardController c)
     {
         
     }

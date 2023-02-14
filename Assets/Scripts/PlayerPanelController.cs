@@ -59,6 +59,8 @@ public class PlayerPanelController : MonoBehaviour
         lbPlayerName.SetText(m.uuid);
         lbCardLeft.SetText(m.leftHand+"");
         lbRank.SetText(m.rank+"");
+        imgTurn.gameObject.SetActive(m.isTurn);
+        
         
     }
 
