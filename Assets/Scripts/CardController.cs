@@ -90,23 +90,39 @@ public class CardController : MonoBehaviour, IBeginDragHandler, IDragHandler, IE
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (!touchEnable)
+        {
+            return;
+        }
         GameManager.instance.ui.handController.onBeginDrag(eventData, this);
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (!touchEnable)
+        {
+            return;
+        }
         GameManager.instance.ui.handController.onDrag(eventData, this);
 
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        if (!touchEnable)
+        {
+            return;
+        }
         GameManager.instance.ui.handController.onEndDrag(eventData, this);
 
     }
     
     public void OnDrop(PointerEventData eventData)
     {
+        if (!touchEnable)
+        {
+            return;
+        }
         GameManager.instance.ui.handController.onDrop(eventData, this);
 
     }

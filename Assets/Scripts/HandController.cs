@@ -58,9 +58,8 @@ public class HandController : MonoBehaviour
                 new Vector3(
                     -this.GetComponent<RectTransform>().rect.width / 2 +
                     con.GetComponent<RectTransform>().rect.width / 2 + count * 30, 0, 0);
-            
-            
-            
+
+            con.touchEnable = true;
 
         }
     }
