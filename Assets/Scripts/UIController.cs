@@ -16,9 +16,9 @@ using UnityEngine.XR;
 
 public class UIController : MonoBehaviour {
 
-    Button btnDraw;
-    Button btnExit;
-    private Button btnStart;
+    public Button btnDraw;
+    public Button btnExit;
+    public Button btnStart;
 
     private PlayerContainer container;
 
@@ -114,7 +114,16 @@ public class UIController : MonoBehaviour {
     void onBtnDrawClick(){
         SocketManager.instance.requestSync(Sig.DRAW_CARD, new {}, (res) =>
         {
-            
+            Debug.Log("use card result "+res);
+            if (Util.checkError(res))
+            {
+                PopupController.instance.showPopup("use error");
+
+                return;
+            }
+                
+            GameManager.instance.setHand(res);
+
         });
     }
 

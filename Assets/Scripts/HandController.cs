@@ -41,7 +41,7 @@ public class HandController : MonoBehaviour
     {
         foreach (Transform child in this.transform)
         {
-            Destroy(child);
+            Destroy(child.gameObject);
         }
 
         var res = Resources.Load("Card");
@@ -145,7 +145,7 @@ public class HandController : MonoBehaviour
                     return;
                 }
                 
-                
+                GameManager.instance.setHand(res);
                 
                 
             });

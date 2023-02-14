@@ -1,4 +1,5 @@
 using System;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -67,7 +68,7 @@ public class SocketManager : MonoBehaviour {
             } else if(res.GetInt("CODE") ==200){
                 //debug.log("START_GAME success");//do nothing
 
-                GameManager.instance.onStartGame(res);
+                GameManager.instance.setHand(res);
             }
         });
         
@@ -111,9 +112,9 @@ public class SocketManager : MonoBehaviour {
             }
         });
 
-        socket.On(Sig.USE_RESULT,(e) => {
+        socket.On(Sig.HAND_INFO,(e) => {
             JSONObject res = e.data;
-            //debug.log("your_turn "+res);
+            Debug.Log("use_result "+res);
             if(res.GetInt("CODE")==500){
                 //debug.log("your_turn fail");//do nothing
                 

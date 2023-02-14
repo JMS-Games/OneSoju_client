@@ -100,7 +100,7 @@ public class GameManager : MonoBehaviour {
         ui.refreshUser();
     }
 
-    public void onStartGame(JSONObject res)
+    public void setHand(JSONObject res)
     {
         Debug.Log("onStartGame "+res);
         var myCards = res.GetField("yourHand");
@@ -125,6 +125,12 @@ public class GameManager : MonoBehaviour {
         if (uuid == PlayerContainer.instance.getMine().uuid)
         {
             this.ui.handController.dragEnable = true;
+            this.ui.btnDraw.gameObject.SetActive(true);
+        }
+        else
+        {
+            this.ui.handController.dragEnable = false;
+            this.ui.btnDraw.gameObject.SetActive(false);
         }
 
         var list = PlayerContainer.instance.getMemberList();
@@ -133,6 +139,7 @@ public class GameManager : MonoBehaviour {
             if (m.uuid == uuid)
             {
                 m.isTurn = true;
+                
             }
             else
             {

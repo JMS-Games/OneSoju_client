@@ -11,7 +11,7 @@ public static class Sig {
     public static readonly int JOIN_ROOM= 100;
     public static readonly int EXIT_ROOM= 200;
     public static readonly int YOUR_TURN= 300;
-    public static readonly int USE_RESULT= 400;
+    public static readonly int HAND_INFO= 400;
     public static readonly int SOMEONE_WIN= 500;
     public static readonly int END_GAME= 600;
     
