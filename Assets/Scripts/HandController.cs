@@ -57,7 +57,7 @@ public class HandController : MonoBehaviour
             con.transform.localPosition =
                 new Vector3(
                     -this.GetComponent<RectTransform>().rect.width / 2 +
-                    con.GetComponent<RectTransform>().rect.width / 2 + count * 30, 0, 0);
+                    con.GetComponent<RectTransform>().rect.width / 2 + count * 45, 0, 0);
 
             con.touchEnable = true;
 
